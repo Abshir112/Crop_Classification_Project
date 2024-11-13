@@ -5,7 +5,7 @@ document.getElementById("prediction-form").addEventListener("submit", async (eve
     const featuresArray = featuresInput.split(",").map(Number);
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/predict", {
+        const response = await fetch("https://crop-classification-project.onrender.com/predict", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
