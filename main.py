@@ -32,9 +32,9 @@ def load_model(path):
 
 
 # Paths to models
-pca_path = os.path.join("backend", "models", "PCA_model.pkl")
-dt_model_path = os.path.join("backend", "models", "DTR_Classifier.pkl")
-ANN_model_path = os.path.join("backend", "models", "ANN_Classifier.pkl")
+pca_path = os.path.join("Backend", "models", "PCA_model.pkl")
+dt_model_path = os.path.join("Backend", "models", "DTR_Classifier.pkl")
+ANN_model_path = os.path.join("Backend", "models", "ANN_Classifier.pkl")
 
 
 # Load models
