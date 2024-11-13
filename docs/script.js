@@ -10,7 +10,7 @@ document.getElementById("prediction-form").addEventListener("submit", async (eve
 
     // Check if the input has exactly 174 features
     if (featuresArray.length !== 174) {
-        resultElement.innerText = "Error: Please enter exactly 174 comma-separated features.";
+        resultElement.innerText = `Error: You entered ${featuresArray.length} features. The model expects 174 comma-separated features.`;
         resultElement.classList.add("error");
         return;
     }
