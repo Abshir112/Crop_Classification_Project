@@ -43,6 +43,11 @@ dt_model = load_model(dt_model_path)
 ANN_model = load_model(ANN_model_path)
 
 
+@app.get("/")
+async def root():
+    return {"message": "API is running"}
+
+
 @app.post("/predict")
 async def predict(data: InputData):
     try:
