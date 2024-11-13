@@ -30,7 +30,9 @@ document.getElementById("prediction-form").addEventListener("submit", async (eve
             document.getElementById("prediction-result").innerText = `Prediction: ${result.prediction}`;
         } else {
             const error = await response.json();
-            document.getElementById("prediction-result").innerText = `Error: ${error.detail}`;
+            // Convert the error.detail to a string if it's an object or array
+            const errorMessage = typeof error.detail === 'string' ? error.detail : JSON.stringify(error.detail);
+            document.getElementById("prediction-result").innerText = `Error: ${errorMessage}`;
         }
     } catch (error) {
         document.getElementById("prediction-result").innerText = `Error: ${error.message}`;
