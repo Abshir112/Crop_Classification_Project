@@ -43,7 +43,7 @@ dt_model = load_model(dt_model_path)
 ANN_model = load_model(ANN_model_path)
 
 
-@app.get("/")
+@app.get("/", methods=["GET", "HEAD"])
 async def root():
     return {"message": "API is running"}
 
