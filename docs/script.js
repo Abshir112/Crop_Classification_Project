@@ -2,7 +2,19 @@ document.getElementById("prediction-form").addEventListener("submit", async (eve
     event.preventDefault();
 
     const featuresInput = document.getElementById("features").value;
-    const featuresArray = featuresInput.split(",").map(Number);
+    const featuresArray = featuresInput.split(",").map(item => Number(item.trim()));
+
+    // Check if the input has exactly 174 features
+    if (featuresArray.length !== 174) {
+        document.getElementById("prediction-result").innerText = "Error: Please enter exactly 174 comma-separated features.";
+        return;
+    }
+
+    // Check if all entries are valid numbers
+    if (featuresArray.some(isNaN)) {
+        document.getElementById("prediction-result").innerText = "Error: Please make sure all features are valid numbers.";
+        return;
+    }
 
     try {
         const response = await fetch("https://crop-classification-project.onrender.com/predict", {
