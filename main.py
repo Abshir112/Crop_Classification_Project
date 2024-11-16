@@ -34,13 +34,17 @@ def load_model(path):
 # Paths to models
 pca_path = os.path.join("Backend", "models", "PCA_model.pkl")
 dt_model_path = os.path.join("Backend", "models", "DTR_Classifier.pkl")
+rf_model_path = os.path.join("Backend", "models", "RF_Classifier.pkl")
 ANN_model_path = os.path.join("Backend", "models", "ANN_Classifier.pkl")
+x_scaled_path = os.path.join("Backend", "models", "Scaler_model.pkl")
 
 
 # Load models
 pca = load_model(pca_path)
+x = load_model(x_scaled_path)
 dt_model = load_model(dt_model_path)
 ANN_model = load_model(ANN_model_path)
+rf_model = load_model(rf_model_path)
 
 
 @app.get("/")
@@ -53,13 +57,16 @@ async def predict(data: InputData):
     try:
         # Convert input data to numpy array
         features = np.array(data.features).reshape(1, -1)
+        
+        features_scaled = x.transform(features)
     
         # Apply PCA transformation
-        features_pca = pca.transform(features)
+        # features_pca = pca.transform(features)
     
         # Perform prediction (Decision Tree Model as default)
-        prediction = dt_model.predict(features_pca)
-        # Optionally switch to ANN model by uncommenting:
+        # prediction = dt_model.predict(features_pca)
+        prediction = rf_model.predict(features_scaled)
+
         # prediction = ANN_model.predict(features_pca)
 
         return {"prediction": int(prediction[0])}
